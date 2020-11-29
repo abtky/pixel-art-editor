@@ -1,7 +1,7 @@
 import React from 'react';
+import io from 'socket.io-client';
 import logo from './logo.svg';
 import './App.css';
-import io from 'socket.io-client';
 
 const getSocket = (): SocketIOClient.Socket => {
   // const isDevelop: boolean = process.env.NODE_ENV === 'development';
