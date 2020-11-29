@@ -2,15 +2,19 @@ import React from 'react';
 import io from 'socket.io-client';
 
 const getSocket = (): SocketIOClient.Socket => {
-  // const isDevelop: boolean = process.env.NODE_ENV === 'development';
-  // const host = isDevelop ? 'localhost:8000' : window.location.host;
-  const { host } = window.location;
+  const isDevelop: boolean = process.env.NODE_ENV === 'development';
+  const host = isDevelop ? 'localhost:8000' : window.location.host;
+  console.log({ host });
   return io(host);
 };
 const socket = getSocket();
+// socket.emit('connection', 'message from client');
+socket.on('init', (serverMessage: string) => {
+  socket.off('init');
+  const initialGameData = JSON.parse(serverMessage);
+  console.log(initialGameData);
+});
 socket.open();
-socket.emit('connection', 'message from client');
-
 const App: React.FC = () => {
   return (
     <div className="App">
