@@ -31,6 +31,9 @@ module.exports = {
   rules: {
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/prefer-interface': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
+    'no-use-before-define': 'off',
+    'react/jsx-props-no-spreading': ['error', { devDependencies: false }],
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'react/prop-types': 'off',
     'spaced-comment': ['error', 'always', { markers: ['/ <reference'] }],
