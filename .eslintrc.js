@@ -9,6 +9,8 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'prettier',
+    'prettier/react',
     'prettier/@typescript-eslint',
   ],
   parser: '@typescript-eslint/parser',
@@ -37,6 +39,7 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'react/prop-types': 'off',
     'spaced-comment': ['error', 'always', { markers: ['/ <reference'] }],
+    'import/prefer-default-export': 'off',
     'import/extensions': 'off',
   },
 };
