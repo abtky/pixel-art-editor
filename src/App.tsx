@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 const getSocket = (): SocketIOClient.Socket => {
   // const isDevelop: boolean = process.env.NODE_ENV === 'development';
   // const host = isDevelop ? 'localhost:8000' : window.location.host;
-  const host = window.location.host;
+  const { host } = window.location;
   return io(host);
 };
 const socket = getSocket();
@@ -20,7 +20,11 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          Edit
+          {' '}
+          <code>src/App.tsx</code>
+          {' '}
+          and save to reload.
         </p>
         <a
           className="App-link"
