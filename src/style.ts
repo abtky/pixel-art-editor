@@ -1,11 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
+const borderColor = 'rgba(255, 255, 255, 0.1)';
+const borderWidth = '1px';
+const borderStyle = 'solid';
 export const cssVars = {
   fontFamily: '"4Mini"',
   fontSize_S: '8px',
   fontSize_M: '16px',
   fontSize_L: '24px',
+  borderColor,
+  borderWidth,
+  borderStyle,
+  border: `${borderStyle} ${borderColor} ${borderWidth}`,
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -14,7 +21,8 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${cssVars.fontFamily};
     font-weight: normal;
     font-style: normal;
-
+    /* src: url('assets/font/munro_narrow.ttf'); */
+    
     src: url('assets/font/4Mini.ttf.woff') format('woff'),
     url('assets/font/4Mini.ttf.svg#4Mini') format('svg'), 
     url('assets/font/4Mini.ttf.eot'),
