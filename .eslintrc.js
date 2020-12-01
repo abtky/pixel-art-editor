@@ -35,11 +35,12 @@ module.exports = {
     '@typescript-eslint/prefer-interface': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
     'no-use-before-define': 'off',
-    'react/jsx-props-no-spreading': ['error', { devDependencies: false }],
+    'react/jsx-props-no-spreading': ['off', { devDependencies: false }],
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'react/prop-types': 'off',
     'spaced-comment': ['error', 'always', { markers: ['/ <reference'] }],
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',
+    'import/no-unresolved': 'off',
   },
 };

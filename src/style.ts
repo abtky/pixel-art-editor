@@ -13,6 +13,8 @@ export const cssVars = {
   borderWidth,
   borderStyle,
   border: `${borderStyle} ${borderColor} ${borderWidth}`,
+  embossLight: 'rgba(255, 255, 255, 0.2)',
+  embossShadow: 'rgba(0, 0, 0, 0.2)',
 };
 
 export const GlobalStyle = createGlobalStyle`
