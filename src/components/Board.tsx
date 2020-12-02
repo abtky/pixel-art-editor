@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { GameData, GridData } from '../interfaces';
 import { cssVars } from '../style';
@@ -15,7 +15,7 @@ const Board: React.FC<Props> = (props: Props) => {
     const color = data.color !== 'white' ? 'white' : 'blue';
     props.onClickGrid(data.index, color);
   };
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handleMouseDown = () => {
     if (!isMouseDown) {
       setIsMouseDown(true);
     }
@@ -58,11 +58,7 @@ const StyledContainer = styled.div`
   box-sizing: border-box;
 `;
 
-interface StyledGridProps {
-  cols: number;
-  rows: number;
-}
-const StyledGrid = styled.div<StyledGridProps>`
+const StyledGrid = styled.div<{ cols: number; rows: number }>`
   border-width: 1px;
   overflow: hidden;
   box-sizing: border-box;

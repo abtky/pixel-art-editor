@@ -10,7 +10,7 @@ export type Props = {
 };
 const Grid: React.FC<Props> = (props: Props) => {
   const { color, index, onClickGrid, isActive } = props;
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleMouseMove = () => {
     if (isActive) {
       onClickGrid(index);
     }

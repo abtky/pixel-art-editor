@@ -7,14 +7,10 @@ import ColorPaletteGrid from './ColorPaletteGrid';
 const ColorPalette: React.FC = () => {
   const [index, setIndex] = useState(0);
   const handleClick = (clickedIndex: number) => {
-    console.log('handleClick', `${index} => ${clickedIndex}`);
     setIndex(clickedIndex);
   };
   const [cols] = useState(10);
   const [rows] = useState(10);
-  useEffect(() => {
-    console.log('useEffect');
-  }, [cols]);
 
   const colors: string[] = useColors(cols, rows);
   return (

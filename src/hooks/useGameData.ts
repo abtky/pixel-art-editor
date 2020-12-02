@@ -45,7 +45,6 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
 
   const handleClickGrid = (index: number, color: string) => {
     const params = JSON.stringify({ index, color });
-    console.log(params);
     socket.emit('color', params);
   };
 
