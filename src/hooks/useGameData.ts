@@ -13,24 +13,29 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   const updateGrid = (jsonString: string) => {
     const grid = JSON.parse(jsonString);
     const grids = gameData?.grids;
+
     if (grids && grids[grid.index]) {
       grids[grid.index] = grid;
       const newData: GameData = {
         ...gameData,
         grids: grids.concat(),
       } as GameData;
+
       setGameData(newData);
     }
   };
+  useEffect(() => {
+    socket.off('color');
+    socket.on('color', (message: string) => {
+      updateGrid(message);
+    });
+  }, [gameData]);
 
   useEffect(() => {
     socket.on('init', (serverMessage: string) => {
       socket.off('init');
       const initialGameData = JSON.parse(serverMessage);
       setGameData(initialGameData);
-    });
-    socket.on('color', (message: string) => {
-      updateGrid(message);
     });
     return () => {
       socket.off('init');
@@ -39,7 +44,6 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   }, []);
 
   const handleClickGrid = (index: number, color: string) => {
-    // const params = JSON.stringify({ index, color });
     const params = JSON.stringify({ index, color });
     console.log(params);
     socket.emit('color', params);
