@@ -34,7 +34,8 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     background-color: #282c34;
-    color: white;
+    /* color: #BFA993; */
+    color: #AFC4C7;
     font-family: ${cssVars.fontFamily};
     font-size: ${cssVars.fontSize_S};
 

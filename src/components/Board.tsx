@@ -16,7 +16,6 @@ const Board: React.FC<Props> = (props: Props) => {
     props.onClickGrid(data.index, color);
   };
   const handleMouseDown = (e: React.MouseEvent) => {
-    console.log('isMouseDown', isMouseDown);
     if (!isMouseDown) {
       setIsMouseDown(true);
     }

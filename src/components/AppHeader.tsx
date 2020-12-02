@@ -17,6 +17,7 @@ const StyledHeader = styled.header`
   align-items: center;
   padding-left: ${cssVars.fontSize_M};
   border-bottom: ${cssVars.border};
+  background-color: #1a1826;
 `;
 
 const StyledTitle = styled.h1`
