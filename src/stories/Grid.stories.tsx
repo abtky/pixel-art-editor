@@ -2,22 +2,26 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import { GlobalStyle } from '../style';
-import Grid from '../components/Grid';
+import Grid, { Props } from '../components/Grid';
 
 export default {
   title: 'Grid',
   component: Grid,
 } as Meta;
 
-const Template: Story = () => (
+const Template: Story<Props> = (args: Props) => (
   <>
     <GlobalStyle />
     <StyledDiv>
-      <Grid />
+      <Grid {...args} />
     </StyledDiv>
   </>
 );
 export const Normal = Template.bind({});
+Normal.args = {
+  index: 0,
+  color: 'transparent',
+};
 
 const StyledDiv = styled.div`
   position: absolute;

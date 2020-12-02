@@ -13,17 +13,8 @@ const App: React.FC = () => {
     <>
       <AppHeader />
       <StyledMain>
-        <Board cols={cols} rows={rows} />
+        <Board cols={cols} rows={rows} grids={grids} />
       </StyledMain>
-      <div className="App">
-        <header className="App-header">
-          <p>
-            grids: {grids.length}
-            <code>src/App.tsx</code>
-            and save to reload.
-          </p>
-        </header>
-      </div>
     </>
   );
 };

@@ -1,24 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { GameData } from '../interfaces';
 import { cssVars } from '../style';
 import Grid from './Grid';
 
-export type Props = {
-  cols: number;
-  rows: number;
-};
+export type Props = GameData;
 const Board: React.FC<Props> = (props: Props) => {
-  const createGrid = () => {
-    const { rows, cols } = props;
-    const length = rows * cols;
-    return new Array(length).fill(null).map((item, i) => ({ index: i }));
-  };
-  const [grids] = useState(createGrid());
+  const { rows, cols, grids } = props;
   return (
     <StyledContainer>
       {grids.map((data) => (
-        <StyledGrid cols={props.cols} rows={props.rows} key={data.index}>
-          <Grid />
+        <StyledGrid cols={cols} rows={rows} key={data.index}>
+          <Grid {...data} />
         </StyledGrid>
       ))}
     </StyledContainer>

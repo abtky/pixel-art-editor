@@ -24,7 +24,6 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   };
 
   useEffect(() => {
-    console.log('useEffect', socket);
     socket.on('init', (serverMessage: string) => {
       socket.off('init');
       const initialGameData = JSON.parse(serverMessage);
