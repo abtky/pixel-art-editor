@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSocket } from '../hooks/useSocket';
 import { useGameData } from '../hooks/useGameData';
-import { GridData } from '../interfaces';
 import AppHeader from './AppHeader';
+import Board from './Board';
 
 const App: React.FC = () => {
   const socket = useSocket();
@@ -12,7 +12,9 @@ const App: React.FC = () => {
   return (
     <>
       <AppHeader />
-      <StyledMain />
+      <StyledMain>
+        <Board cols={cols} rows={rows} />
+      </StyledMain>
       <div className="App">
         <header className="App-header">
           <p>

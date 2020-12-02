@@ -12,4 +12,5 @@ const StyledDiv = styled.div`
   border: solid 1px;
   border-color: ${cssVars.embossShadow} ${cssVars.embossLight}
     ${cssVars.embossLight} ${cssVars.embossShadow};
+  box-sizing: border-box;
 `;
