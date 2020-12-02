@@ -9,13 +9,23 @@ export type Props = {
   onClickGrid: (index: number) => void;
 };
 const Grid: React.FC<Props> = (props: Props) => {
-  const { color, index, onClickGrid } = props;
+  const { color, index, onClickGrid, isActive } = props;
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isActive) {
+      onClickGrid(index);
+    }
+  };
   const handleClick = () => {
     onClickGrid(index);
   };
+
   return (
     <StyledDiv>
-      <StyledInner color={color} onClick={handleClick} />
+      <StyledInner
+        color={color}
+        onClick={handleClick}
+        onMouseEnter={handleMouseMove}
+      />
     </StyledDiv>
   );
 };

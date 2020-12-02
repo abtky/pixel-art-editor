@@ -9,16 +9,34 @@ export type Props = GameData & {
 };
 const Board: React.FC<Props> = (props: Props) => {
   const { rows, cols, grids } = props;
+  const [isMouseDown, setIsMouseDown] = useState(false);
 
   const handleClick = (data: GridData) => {
     const color = data.color !== 'white' ? 'white' : 'blue';
     props.onClickGrid(data.index, color);
   };
+  const handleMouseDown = (e: React.MouseEvent) => {
+    console.log('isMouseDown', isMouseDown);
+    if (!isMouseDown) {
+      setIsMouseDown(true);
+    }
+  };
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
   return (
-    <StyledContainer>
+    <StyledContainer
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onMouseDown={handleMouseDown}
+    >
       {grids.map((data) => (
         <StyledGrid cols={cols} rows={rows} key={data.index}>
-          <Grid {...data} isActive onClickGrid={() => handleClick(data)} />
+          <Grid
+            {...data}
+            isActive={isMouseDown}
+            onClickGrid={() => handleClick(data)}
+          />
         </StyledGrid>
       ))}
     </StyledContainer>
