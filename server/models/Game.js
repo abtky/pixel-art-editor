@@ -2,11 +2,11 @@ const Grid = require('./Grid');
 
 class Game {
   static get NUM_COLS() {
-    return 32;
+    return 16;
   }
 
   static get NUM_ROWS() {
-    return 32;
+    return 16;
   }
 
   constructor() {
