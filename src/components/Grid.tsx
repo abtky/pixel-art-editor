@@ -5,12 +5,17 @@ import { cssVars } from '../style';
 export type Props = {
   index: number;
   color: string;
+  isActive: boolean;
+  onClickGrid: (index: number) => void;
 };
 const Grid: React.FC<Props> = (props: Props) => {
-  const { color, index } = props;
+  const { color, index, onClickGrid } = props;
+  const handleClick = () => {
+    onClickGrid(index);
+  };
   return (
     <StyledDiv>
-      <StyledInner color={color} />
+      <StyledInner color={color} onClick={handleClick} />
     </StyledDiv>
   );
 };

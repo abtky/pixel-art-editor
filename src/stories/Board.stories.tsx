@@ -25,6 +25,7 @@ const Template: Story<Props> = (args: Props) => {
       <Board
         cols={args.cols}
         rows={args.rows}
+        onClickGrid={() => {}}
         grids={createGrids(args.cols, args.rows)}
       />
     </>

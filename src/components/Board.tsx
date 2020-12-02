@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { GameData } from '../interfaces';
+import { GameData, GridData } from '../interfaces';
 import { cssVars } from '../style';
 import Grid from './Grid';
 
-export type Props = GameData;
+export type Props = GameData & {
+  onClickGrid: (index: number, color: string) => void;
+};
 const Board: React.FC<Props> = (props: Props) => {
   const { rows, cols, grids } = props;
+
+  const handleClick = (data: GridData) => {
+    const color = data.color !== 'white' ? 'white' : 'blue';
+    props.onClickGrid(data.index, color);
+  };
   return (
     <StyledContainer>
       {grids.map((data) => (
         <StyledGrid cols={cols} rows={rows} key={data.index}>
-          <Grid {...data} />
+          <Grid {...data} isActive onClickGrid={() => handleClick(data)} />
         </StyledGrid>
       ))}
     </StyledContainer>

@@ -13,7 +13,12 @@ const App: React.FC = () => {
     <>
       <AppHeader />
       <StyledMain>
-        <Board cols={cols} rows={rows} grids={grids} />
+        <Board
+          onClickGrid={handleClickGrid}
+          cols={cols}
+          rows={rows}
+          grids={grids}
+        />
       </StyledMain>
     </>
   );

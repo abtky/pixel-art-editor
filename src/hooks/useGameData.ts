@@ -5,7 +5,7 @@ type ReturnType = {
   grids: GridData[];
   cols: number;
   rows: number;
-  handleClickGrid: () => void;
+  handleClickGrid: (index: number, color: string) => void;
 };
 export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   const [gameData, setGameData] = useState<GameData>();
@@ -38,11 +38,8 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
     };
   }, []);
 
-  const handleClickGrid = () => {
+  const handleClickGrid = (index: number, color: string) => {
     // const params = JSON.stringify({ index, color });
-    const length = 1024;
-    const index = Math.floor(Math.random() * length) || 0;
-    const color = 'black';
     const params = JSON.stringify({ index, color });
     console.log(params);
     socket.emit('color', params);
