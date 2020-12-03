@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSocket } from '../hooks/useSocket';
 import { useGameData } from '../hooks/useGameData';
@@ -9,7 +9,11 @@ import { cssVars } from '../style';
 
 const App: React.FC = () => {
   const socket = useSocket();
+  const [color, setColor] = useState('gold');
   const { grids, cols, rows, handleClickGrid } = useGameData(socket);
+  const handleChangeColor = (newColor: string) => {
+    setColor(newColor);
+  };
 
   return (
     <>
@@ -17,14 +21,16 @@ const App: React.FC = () => {
       <StyledMain>
         <StyledBoardContainer>
           <Board
-            onClickGrid={handleClickGrid}
+            onClickGrid={(index: number) => {
+              handleClickGrid(index, color);
+            }}
             cols={cols}
             rows={rows}
             grids={grids}
           />
         </StyledBoardContainer>
         <StyledSideBarContainer>
-          <SideBar />
+          <SideBar onChangeColor={handleChangeColor} />
         </StyledSideBarContainer>
       </StyledMain>
     </>

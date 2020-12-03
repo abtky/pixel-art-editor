@@ -5,15 +5,14 @@ import { cssVars } from '../style';
 import Grid from './Grid';
 
 export type Props = GameData & {
-  onClickGrid: (index: number, color: string) => void;
+  onClickGrid: (index: number) => void;
 };
 const Board: React.FC<Props> = (props: Props) => {
   const { rows, cols, grids } = props;
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   const handleClick = (data: GridData) => {
-    const color = data.color !== 'white' ? 'white' : 'blue';
-    props.onClickGrid(data.index, color);
+    props.onClickGrid(data.index);
   };
   const handleMouseDown = () => {
     if (!isMouseDown) {

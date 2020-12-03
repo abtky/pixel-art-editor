@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { cssVars } from '../style';
 import { useColors } from '../hooks/useColors';
 import ColorPaletteGrid from './ColorPaletteGrid';
 
-const ColorPalette: React.FC = () => {
+type Props = {
+  cols: number;
+  rows: number;
+  onChangeColor: (color: string) => void;
+};
+const ColorPalette: React.FC<Props> = (props: Props) => {
   const [index, setIndex] = useState(0);
   const handleClick = (clickedIndex: number) => {
     setIndex(clickedIndex);
+    onChangeColor(colors[clickedIndex]);
   };
-  const [cols] = useState(10);
-  const [rows] = useState(10);
+  const { cols, rows, onChangeColor } = props;
 
   const colors: string[] = useColors(cols, rows);
   return (
