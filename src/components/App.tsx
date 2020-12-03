@@ -16,7 +16,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
+    <StyledWrap>
       <AppHeader />
       <StyledMain>
         <StyledBoardContainer>
@@ -33,14 +33,21 @@ const App: React.FC = () => {
           <SideBar onChangeColor={handleChangeColor} />
         </StyledSideBarContainer>
       </StyledMain>
-    </>
+    </StyledWrap>
   );
 };
 export default App;
 
+const StyledWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
 const StyledMain = styled.main`
   display: flex;
   flex-direction: row;
+  flex: 1 1 100%;
 `;
 
 const StyledBoardContainer = styled.div`
