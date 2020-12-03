@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { cssVars } from '../style';
 import { useColors } from '../hooks/useColors';
@@ -16,6 +16,9 @@ const ColorPalette: React.FC<Props> = (props: Props) => {
     onChangeColor(colors[clickedIndex]);
   };
   const { cols, rows, onChangeColor } = props;
+  useEffect(() => {
+    onChangeColor(colors[index]);
+  }, []);
 
   const colors: string[] = useColors(cols, rows);
   return (
@@ -55,6 +58,8 @@ const StyledContainer = styled.div`
   flex-direction: rows;
   flex-wrap: wrap;
   padding: 8px;
+  box-sizing: border-box;
+  width: 100%;
 `;
 
 const StyledGrid = styled.div<{

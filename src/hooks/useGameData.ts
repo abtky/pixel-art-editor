@@ -40,6 +40,7 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
     return () => {
       socket.off('init');
       socket.off('color');
+      socket.disconnect();
     };
   }, []);
 
