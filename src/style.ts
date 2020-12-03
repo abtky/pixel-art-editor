@@ -15,6 +15,8 @@ export const cssVars = {
   border: `${borderStyle} ${borderColor} ${borderWidth}`,
   embossLight: 'rgba(255, 255, 255, 0.2)',
   embossShadow: 'rgba(0, 0, 0, 0.2)',
+  colorBackground: '#282c34',
+  colorText: '#AFC4C7',
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -33,9 +35,8 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    background-color: #282c34;
-    /* color: #BFA993; */
-    color: #AFC4C7;
+    background-color: ${cssVars.colorBackground};
+    color: ${cssVars.colorText};
     font-family: ${cssVars.fontFamily};
     font-size: ${cssVars.fontSize_S};
 

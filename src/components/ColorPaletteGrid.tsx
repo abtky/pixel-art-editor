@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { cssVars } from '../style';
 
 type Props = {
   index: number;
@@ -22,18 +23,23 @@ const StyledDiv = styled.div<{ color: string }>`
   cursor: pointer;
   width: 100%;
   height: 100%;
+  border-width: 1px;
+  border-color: ${cssVars.colorBackground};
+  border-style: solid none none solid;
+  box-sizing: border-box;
 `;
 
 const StyledBorder = styled.div<{ opacity: number }>`
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 1px;
+  left: 1px;
   background-color: transparent;
   border: solid white 2px;
-  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2) inset;
+  box-shadow: 0 0 0 1px ${cssVars.colorBackground} inset;
   opacity: ${(props) => props.opacity};
   pointer-events: none;
   box-sizing: border-box;
+  z-index: 1;
 `;
