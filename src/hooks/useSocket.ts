@@ -6,8 +6,9 @@ const getSocket = (): SocketIOClient.Socket => {
   const host = isDevelop ? 'localhost:8000' : window.location.host;
   return io(host);
 };
+const webSocket = getSocket();
 export const useSocket = (): SocketIOClient.Socket => {
-  const [socket] = useState(getSocket());
+  const [socket] = useState(webSocket);
   useEffect(() => {
     return () => {
       socket.disconnect();
