@@ -53,8 +53,11 @@ const StyledMain = styled.main`
 const StyledBoardContainer = styled.div`
   flex: 1;
   object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const StyledSideBarContainer = styled.div`
-  width: 320px;
+  width: min(${cssVars.layoutSidebarWidth}, ${cssVars.layoutSidebarMinWidth});
   border-left: ${cssVars.border};
 `;

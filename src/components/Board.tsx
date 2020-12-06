@@ -45,7 +45,12 @@ const StyledContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  --size: min(100vw, 100vh);
+  --width: max(
+    calc(100vw - ${cssVars.layoutSidebarMinWidth}),
+    calc(100vw - ${cssVars.layoutSidebarWidth})
+  );
+  --height: calc(100vh - ${cssVars.layoutHeaderHeight});
+  --size: min(var(--width), var(--height));
   width: var(--size);
   height: var(--size);
   padding: 4px;

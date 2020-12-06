@@ -44,4 +44,5 @@ const StyledInner = styled.div<{ color: string }>`
   height: 100%;
   position: relative;
   background-color: ${(props) => props.color};
+  cursor: pointer;
 `;

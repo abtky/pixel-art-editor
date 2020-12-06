@@ -17,6 +17,9 @@ export const cssVars = {
   embossShadow: 'rgba(0, 0, 0, 0.2)',
   colorBackground: '#282c34',
   colorText: '#AFC4C7',
+  layoutHeaderHeight: '40px',
+  layoutSidebarWidth: '320px',
+  layoutSidebarMinWidth: '30vw',
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -25,7 +28,6 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${cssVars.fontFamily};
     font-weight: normal;
     font-style: normal;
-    /* src: url('assets/font/munro_narrow.ttf'); */
     
     src: url('assets/font/4Mini.ttf.woff') format('woff'),
     url('assets/font/4Mini.ttf.svg#4Mini') format('svg'), 

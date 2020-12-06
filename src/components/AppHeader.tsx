@@ -12,7 +12,7 @@ const AppHeader: React.FC = () => {
 
 export default AppHeader;
 const StyledHeader = styled.header`
-  height: 40px;
+  height: ${cssVars.layoutHeaderHeight};
   display: flex;
   align-items: center;
   padding-left: ${cssVars.fontSize_M};
