@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { cssVars } from '../../style';
 import ButtonList from './ButtonList';
+import InputName from './InputName';
 
 type Props = {
   socket: SocketIOClient.Socket;
@@ -11,7 +12,8 @@ const Entrance: React.FC<Props> = (props: Props) => {
   return (
     <StyledWrapper>
       <StyledContent>
-        <StyledTitle>ENTER YOUR NAME.</StyledTitle>E ntrance{socket.id}
+        <StyledTitle>ENTER YOUR NAME.</StyledTitle>
+        <InputName maxLength={8} />
         <ButtonList />
       </StyledContent>
     </StyledWrapper>
@@ -45,5 +47,4 @@ const StyledContent = styled.div`
 
 const StyledTitle = styled.h2`
   font-size: ${cssVars.fontSize_M};
-  margin-bottom: 1em;
 `;
