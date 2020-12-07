@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { GlobalStyle } from '../style';
-import Entrance, { Props } from '../components/entrance/Entrance';
+import Entrance from '../components/entrance/Entrance';
 import { useSocket } from '../hooks/useSocket';
 
 export default {
@@ -9,7 +9,7 @@ export default {
   component: Entrance,
 } as Meta;
 
-const Template: Story<Props> = (args: Props) => {
+const Template: Story = () => {
   const socket = useSocket();
   return (
     <>
