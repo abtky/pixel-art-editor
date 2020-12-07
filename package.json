@@ -29,7 +29,7 @@
     "react:test": "react-scripts test",
     "react:eject": "react-scripts eject",
     "server:start": "node server/index.js",
-    "server:test": "jest",
+    "server:test": "jest --watch",
     "lint": "eslint src --ext .ts,.tsx --fix",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
