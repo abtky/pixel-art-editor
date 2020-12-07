@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { cssVars } from '../style';
+import { cssVars } from '../../style';
 
 export type Props = {
   index: number;

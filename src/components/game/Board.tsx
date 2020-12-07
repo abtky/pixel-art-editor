@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { GameData, GridData } from '../interfaces';
-import { cssVars } from '../style';
+import { GameData, GridData } from '../../interfaces';
+import { cssVars } from '../../style';
 import Grid from './Grid';
 
 export type Props = GameData & {

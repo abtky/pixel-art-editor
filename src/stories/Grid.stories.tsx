@@ -2,7 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import { GlobalStyle } from '../style';
-import Grid, { Props } from '../components/Grid';
+import Grid, { Props } from '../components/game/Grid';
 
 export default {
   title: 'Grid',

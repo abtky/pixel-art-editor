@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { cssVars } from '../style';
-import { useColors } from '../hooks/useColors';
+import { cssVars } from '../../style';
+import { useColors } from '../../hooks/useColors';
 import ColorPaletteGrid from './ColorPaletteGrid';
 
 type Props = {

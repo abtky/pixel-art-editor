@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { GlobalStyle } from '../style';
-import Board, { Props } from '../components/Board';
+import Board, { Props } from '../components/game/Board';
 
 export default {
   title: 'Board',
@@ -25,7 +25,9 @@ const Template: Story<Props> = (args: Props) => {
       <Board
         cols={args.cols}
         rows={args.rows}
-        onClickGrid={() => {}}
+        onClickGrid={() => {
+          console.log('onClickGrid');
+        }}
         grids={createGrids(args.cols, args.rows)}
       />
     </>
