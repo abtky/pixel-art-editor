@@ -9,12 +9,23 @@ export const useInputName = (maxLength: number): State => {
 
   useEffect(() => {
     document.onkeydown = (e: KeyboardEvent) => {
-      addLetter(e.key.toUpperCase());
+      console.log(e.code);
+      switch (e.code.toLowerCase()) {
+        case 'backspace':
+          popLetter();
+          return;
+        default:
+          addLetter(e.key.toUpperCase());
+      }
     };
     return () => {
       document.onkeydown = null;
     };
   }, []);
+  const popLetter = () => {
+    value.pop();
+    setValue([...value]);
+  };
   const addLetter = (letter: string) => {
     const isAlphaNumeric = /^[0-9A-Z]$/;
     if (letter.match(isAlphaNumeric)) {

@@ -16,7 +16,6 @@ const InputName: React.FC<Props> = (props: Props) => {
     }
     return nameArray.length === maxLength && index === maxLength - 1;
   };
-  console.log({ nameArray });
   return (
     <StyledContainer>
       <StyledLetterContainer>
