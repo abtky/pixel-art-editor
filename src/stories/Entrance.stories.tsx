@@ -2,7 +2,6 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { GlobalStyle } from '../style';
 import Entrance from '../components/entrance/Entrance';
-import { useSocket } from '../hooks/useSocket';
 
 export default {
   title: 'Entrance',
@@ -10,11 +9,13 @@ export default {
 } as Meta;
 
 const Template: Story = () => {
-  const socket = useSocket();
+  const handleDecideName = (name: string) => {
+    console.log('handleDecideName', name);
+  };
   return (
     <>
       <GlobalStyle />
-      <Entrance socket={socket} />
+      <Entrance onDecideName={handleDecideName} />
     </>
   );
 };

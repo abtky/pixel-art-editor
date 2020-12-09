@@ -3,18 +3,32 @@ import styled from 'styled-components';
 import { cssVars } from '../../style';
 import ButtonList from './ButtonList';
 import InputName from './InputName';
+import { useInputName } from '../../hooks/useInputName';
 
 type Props = {
-  socket: SocketIOClient.Socket;
+  onDecideName: (name: string) => void;
 };
 const Entrance: React.FC<Props> = (props: Props) => {
-  const { socket } = props;
+  const maxLength = 8;
+  const { nameArray, setName, clearValue } = useInputName(maxLength);
+  const handleClickClear = () => {
+    clearValue();
+  };
+  const handleClickExecute = () => {
+    if (nameArray.length < 1) {
+      setName('UNKNOWN');
+    }
+    props.onDecideName(nameArray.join(''));
+  };
   return (
     <StyledWrapper>
       <StyledContent>
         <StyledTitle>ENTER YOUR NAME.</StyledTitle>
-        <InputName maxLength={8} />
-        <ButtonList />
+        <InputName nameArray={nameArray} maxLength={maxLength} />
+        <ButtonList
+          onClickClear={handleClickClear}
+          onClickExecute={handleClickExecute}
+        />
       </StyledContent>
     </StyledWrapper>
   );

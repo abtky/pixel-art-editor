@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 
 type State = {
   nameArray: string[];
+  setName: (name: string) => void;
+  clearValue: () => void;
   addLetter: (letter: string) => void;
 };
 export const useInputName = (maxLength: number): State => {
@@ -9,7 +11,6 @@ export const useInputName = (maxLength: number): State => {
 
   useEffect(() => {
     document.onkeydown = (e: KeyboardEvent) => {
-      console.log(e.code);
       switch (e.code.toLowerCase()) {
         case 'backspace':
           popLetter();
@@ -21,13 +22,14 @@ export const useInputName = (maxLength: number): State => {
     return () => {
       document.onkeydown = null;
     };
-  }, []);
+  }, [value]);
   const popLetter = () => {
     value.pop();
     setValue([...value]);
   };
   const addLetter = (letter: string) => {
     const isAlphaNumeric = /^[0-9A-Z]$/;
+    console.log('addLetter', value);
     if (letter.match(isAlphaNumeric)) {
       while (value.length >= maxLength) {
         value.pop();
@@ -36,13 +38,24 @@ export const useInputName = (maxLength: number): State => {
       setValue([...value]);
     }
   };
+  const setName = (name: string) => {
+    clearValue();
+    name.split('').forEach((v) => {
+      addLetter(v);
+    });
+  };
   const clearValue = () => {
-    setValue([]);
+    while (value.length) {
+      value.pop();
+    }
+    console.log('clearValue', value);
+    setValue([...value]);
   };
 
   return {
     nameArray: value,
-    addLetter,
+    setName,
     clearValue,
+    addLetter,
   };
 };

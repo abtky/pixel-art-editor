@@ -2,11 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { cssVars } from '../../style';
 
-const ButtonList: React.FC = () => {
+type Props = {
+  onClickClear: (e: React.MouseEvent) => void;
+  onClickExecute: (e: React.MouseEvent) => void;
+};
+const ButtonList: React.FC<Props> = (props: Props) => {
+  const { onClickClear, onClickExecute } = props;
   return (
     <StyledWrapper>
-      <StyledButton primary={false}>CLEAR</StyledButton>
-      <StyledButton primary>OK</StyledButton>
+      <StyledButton onClick={onClickClear} primary={false}>
+        CLEAR
+      </StyledButton>
+      <StyledButton onClick={onClickExecute} primary>
+        OK
+      </StyledButton>
     </StyledWrapper>
   );
 };

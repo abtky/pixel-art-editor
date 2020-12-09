@@ -1,15 +1,14 @@
 import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { cssVars } from '../../style';
-import { useInputName } from '../../hooks/useInputName';
 
 type Props = {
   maxLength: number;
+  nameArray: string[];
 };
 
 const InputName: React.FC<Props> = (props: Props) => {
-  const { maxLength } = props;
-  const { nameArray, addLetter } = useInputName(maxLength);
+  const { maxLength, nameArray } = props;
   const isCurrent = (index: number): boolean => {
     if (index === nameArray.length) {
       return true;
@@ -26,7 +25,8 @@ const InputName: React.FC<Props> = (props: Props) => {
       </StyledLetterContainer>
       <StyledCursorContainer>
         {new Array(maxLength).fill('').map((v, i) => {
-          return <StyledCursor current={isCurrent(i)} />;
+          // eslint-disable-next-line react/no-array-index-key
+          return <StyledCursor key={i} current={isCurrent(i)} />;
         })}
       </StyledCursorContainer>
     </StyledContainer>
