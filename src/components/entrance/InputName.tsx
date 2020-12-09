@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { cssVars } from '../../style';
 import { useInputName } from '../../hooks/useInputName';
 
@@ -46,17 +46,21 @@ const StyledCursorContainer = styled.div`
   display: flex;
   flex-direction: row;
 `;
+const blinkCursor = () =>
+  keyframes`
+    0% { opacity: 0 }
+    50% { opacity: 1 }
+    100% { opacity: 1 }
+  `;
+const animation = () => css`
+  animation: ${blinkCursor()} 0.5s steps(1) infinite;
+`;
 const StyledCursor = styled.div<{ current: boolean }>`
   width: ${girdWidth};
   height: 2px;
   background-color: ${cssVars.colorText};
   margin: 0 ${girdMargin};
-  ${(props) => {
-    if (props.current) {
-      return `background-color: red`;
-    }
-    return '';
-  }}
+  ${(props) => (props.current ? animation() : '')}
 `;
 
 const StyledLetterContainer = styled.div`
