@@ -4,21 +4,21 @@ import { cssVars } from '../../style';
 
 type Props = {
   maxLength: number;
-  nameArray: string[];
+  name: string;
 };
 
 const InputName: React.FC<Props> = (props: Props) => {
-  const { maxLength, nameArray } = props;
+  const { maxLength, name } = props;
   const isCurrent = (index: number): boolean => {
-    if (index === nameArray.length) {
+    if (index === name.length) {
       return true;
     }
-    return nameArray.length === maxLength && index === maxLength - 1;
+    return name.length === maxLength && index === maxLength - 1;
   };
   return (
     <StyledContainer>
       <StyledLetterContainer>
-        {nameArray.map((letter, i) => {
+        {name.split('').map((letter, i) => {
           // eslint-disable-next-line react/no-array-index-key
           return <StyledLetter key={i}>{letter}</StyledLetter>;
         })}

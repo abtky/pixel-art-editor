@@ -3,28 +3,28 @@ import styled from 'styled-components';
 import { cssVars } from '../../style';
 import ButtonList from './ButtonList';
 import InputName from './InputName';
-import { useInputName } from '../../hooks/useInputName';
+import { useUserName } from '../../hooks/useUserName';
 
 type Props = {
   onDecideName: (name: string) => void;
 };
 const Entrance: React.FC<Props> = (props: Props) => {
   const maxLength = 8;
-  const { nameArray, setName, clearValue } = useInputName(maxLength);
+  const { name, set, clear } = useUserName(maxLength);
   const handleClickClear = () => {
-    clearValue();
+    clear();
   };
   const handleClickExecute = () => {
-    if (nameArray.length < 1) {
-      setName('UNKNOWN');
+    if (!name) {
+      set('UNKNOWN');
     }
-    props.onDecideName(nameArray.join(''));
+    props.onDecideName(name);
   };
   return (
     <StyledWrapper>
       <StyledContent>
         <StyledTitle>ENTER YOUR NAME.</StyledTitle>
-        <InputName nameArray={nameArray} maxLength={maxLength} />
+        <InputName name={name} maxLength={maxLength} />
         <ButtonList
           onClickClear={handleClickClear}
           onClickExecute={handleClickExecute}

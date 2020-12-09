@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 
 type State = {
-  nameArray: string[];
+  name: string;
   set: (name: string) => void;
   clear: () => void;
   append: (letter: string) => void;
 };
 export const useUserName = (maxLength: number): State => {
-  const [value, setValue] = useState<string[]>([]);
+  const [value, setValue] = useState<string>('');
 
   useEffect(() => {
     document.onkeydown = (e: KeyboardEvent) => {
@@ -25,17 +25,15 @@ export const useUserName = (maxLength: number): State => {
   }, [value]);
 
   const pop = () => {
-    value.pop();
-    setValue([...value]);
+    const newValue = value.substr(0, value.length - 1);
+
+    setValue(newValue);
   };
   const append = (letter: string) => {
     const isAlphaNumeric = /^[0-9A-Z]$/;
     if (letter.match(isAlphaNumeric)) {
-      while (value.length >= maxLength) {
-        value.pop();
-      }
-      value.push(letter);
-      setValue([...value]);
+      const newValue = value.substr(0, maxLength - 1) + letter;
+      setValue(newValue);
     }
   };
   const set = (name: string) => {
@@ -45,14 +43,11 @@ export const useUserName = (maxLength: number): State => {
     });
   };
   const clear = () => {
-    while (value.length) {
-      value.pop();
-    }
-    setValue([...value]);
+    setValue('');
   };
 
   return {
-    nameArray: value,
+    name: value,
     set,
     clear,
     append,
