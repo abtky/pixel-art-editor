@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Player } from '../interfaces';
+
+type JoinedServerMessage = {
+  players: Player[];
+};
 export const usePlayerList = (socket: SocketIOClient.Socket) => {
-  const [players, setPlayers] = useState<Player[]>();
+  const [players, setPlayers] = useState<Player[]>([]);
   useEffect(() => {
-    socket.on('joined', (serverMessage: string) => {
+    socket.on('joined', (serverMessage: JoinedServerMessage) => {
       console.log(serverMessage);
+      setPlayers(serverMessage.players);
     });
     return () => {
       socket.off('joined');
@@ -13,8 +18,7 @@ export const usePlayerList = (socket: SocketIOClient.Socket) => {
 
   const register = (name: string) => {
     const params = JSON.stringify({ name });
-    console.log(params);
-    socket.emit('register', params);
+    socket.emit('join', params);
   };
   return { players, register };
 };

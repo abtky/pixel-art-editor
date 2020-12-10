@@ -4,12 +4,14 @@ import Board from './Board';
 import SideBar from './SideBar';
 import { cssVars } from '../../style';
 import { useGameData } from '../../hooks/useGameData';
+import { Player } from '../../interfaces';
 
 type Props = {
   socket: SocketIOClient.Socket;
+  players: Player[];
 };
 const Game: React.FC<Props> = (props: Props) => {
-  const { socket } = props;
+  const { socket, players } = props;
   const [color, setColor] = useState('gold');
   const { grids, cols, rows, handleClickGrid } = useGameData(socket);
   const handleChangeColor = (newColor: string) => {

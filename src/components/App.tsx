@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSocket } from '../hooks/useSocket';
 import { usePlayerList } from '../hooks/usePlayerList';
@@ -10,15 +10,19 @@ import { SocketStatus } from '../interfaces';
 const App: React.FC = () => {
   const socket = useSocket();
   const [initialized] = useState(false);
-  const { register } = usePlayerList(socket);
+  const { players, register } = usePlayerList(socket);
   const handleDecideName = (name: string) => {
     console.log('handleDecideName', name);
     register(name);
   };
 
+  useEffect(() => {
+    console.log('useEffect.players', players);
+  }, [players]);
+
   const renderMain = () => {
-    if (initialized) {
-      return <Game socket={socket} />;
+    if (players.length > 0) {
+      return <Game socket={socket} players={players} />;
     }
     return (
       <Entrance onDecideName={handleDecideName} status={SocketStatus.UNKNOWN} />

@@ -5,7 +5,7 @@ class User {
 
   static toValidName(value) {
     const letters = value.split(''); // 文字列を配列に分割
-    const pattern = /[0-9a-z]/;
+    const pattern = /[0-9a-zA-Z]/;
     const filtered = letters.filter((letter) => {
       return letter.match(pattern);
     });
