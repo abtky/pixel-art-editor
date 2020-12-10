@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { cssVars } from '../../style';
 import ButtonList from './ButtonList';
@@ -10,7 +10,7 @@ type Props = {
 };
 const Entrance: React.FC<Props> = (props: Props) => {
   const maxLength = 8;
-  const { name, set, clear } = useUserName(maxLength);
+  const { name, set, clear, pop, append } = useUserName(maxLength);
   const handleClickClear = () => {
     clear();
   };
@@ -20,6 +20,24 @@ const Entrance: React.FC<Props> = (props: Props) => {
     }
     props.onDecideName(name);
   };
+
+  useEffect(() => {
+    document.onkeydown = (e: KeyboardEvent) => {
+      if (e.key.length === 1) {
+        append(e.key.toUpperCase());
+      }
+      switch (e.code.toLowerCase()) {
+        case 'backspace':
+          pop();
+          break;
+        default:
+          break;
+      }
+    };
+    return () => {
+      document.onkeydown = null;
+    };
+  }, [name]);
   return (
     <StyledWrapper>
       <StyledContent>
