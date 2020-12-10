@@ -1,18 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSocket } from '../hooks/useSocket';
+import { usePlayerList } from '../hooks/usePlayerList';
 import AppHeader from './AppHeader';
 import Game from './game/Game';
+import Entrance from './entrance/Entrance';
+import { SocketStatus } from '../interfaces';
 
 const App: React.FC = () => {
   const socket = useSocket();
+  const [initialized] = useState(false);
+  const { register } = usePlayerList(socket);
+  const handleDecideName = (name: string) => {
+    console.log('handleDecideName', name);
+    register(name);
+  };
+
+  const renderMain = () => {
+    if (initialized) {
+      return <Game socket={socket} />;
+    }
+    return (
+      <Entrance onDecideName={handleDecideName} status={SocketStatus.UNKNOWN} />
+    );
+  };
 
   return (
     <StyledWrap>
       <AppHeader />
-      <StyledMain>
-        <Game socket={socket} />
-      </StyledMain>
+      <StyledMain>{renderMain()}</StyledMain>
     </StyledWrap>
   );
 };

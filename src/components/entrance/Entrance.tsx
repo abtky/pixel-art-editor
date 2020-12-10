@@ -4,19 +4,25 @@ import { cssVars } from '../../style';
 import ButtonList from './ButtonList';
 import InputName from './InputName';
 import { useUserName } from '../../hooks/useUserName';
+import { SocketStatus } from '../../interfaces';
 
 type Props = {
+  status: SocketStatus;
   onDecideName: (name: string) => void;
 };
 const Entrance: React.FC<Props> = (props: Props) => {
   const maxLength = 8;
+  const { status } = props;
   const { name, set, clear, pop, append } = useUserName(maxLength);
   const handleClickClear = () => {
     clear();
   };
   const handleClickExecute = () => {
     if (!name) {
-      set('UNKNOWN');
+      const alternativeValue = 'UNKNOWN';
+      set(alternativeValue);
+      props.onDecideName(alternativeValue);
+      return;
     }
     props.onDecideName(name);
   };
@@ -47,6 +53,7 @@ const Entrance: React.FC<Props> = (props: Props) => {
           onClickClear={handleClickClear}
           onClickExecute={handleClickExecute}
         />
+        {status}
       </StyledContent>
     </StyledWrapper>
   );
