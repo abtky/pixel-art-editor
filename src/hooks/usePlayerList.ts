@@ -4,21 +4,29 @@ import { Player } from '../interfaces';
 type JoinedServerMessage = {
   players: Player[];
 };
-export const usePlayerList = (socket: SocketIOClient.Socket) => {
+type State = {
+  players: Player[];
+  register: (name: string) => Promise<Player[]>;
+};
+export const usePlayerList = (socket: SocketIOClient.Socket): State => {
   const [players, setPlayers] = useState<Player[]>([]);
+  /*
   useEffect(() => {
-    socket.on('joined', (serverMessage: JoinedServerMessage) => {
-      console.log(serverMessage);
-      setPlayers(serverMessage.players);
+    console.log(players);
+  }, [players]);
+  */
+  const register = (name: string): Promise<Player[]> => {
+    return new Promise((resolve) => {
+      const params = JSON.stringify({ name });
+      console.log('register');
+      socket.on('joined', (serverMessage: JoinedServerMessage) => {
+        setPlayers(serverMessage.players);
+        socket.off('joined');
+        console.log('register.resolve', serverMessage.players);
+        resolve(players);
+      });
+      socket.emit('join', params);
     });
-    return () => {
-      socket.off('joined');
-    };
-  }, []);
-
-  const register = (name: string) => {
-    const params = JSON.stringify({ name });
-    socket.emit('join', params);
   };
   return { players, register };
 };

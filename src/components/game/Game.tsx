@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Board from './Board';
-import SideBar from './SideBar';
 import { cssVars } from '../../style';
 import { useGameData } from '../../hooks/useGameData';
 import { Player } from '../../interfaces';
+import ColorPalette from './ColorPalette';
+import PlayerList from './PlayerList';
 
 type Props = {
   socket: SocketIOClient.Socket;
@@ -18,7 +19,7 @@ const Game: React.FC<Props> = (props: Props) => {
     setColor(newColor);
   };
   return (
-    <>
+    <StyledMain>
       <StyledBoardContainer>
         <Board
           onClickGrid={(index: number) => {
@@ -30,12 +31,18 @@ const Game: React.FC<Props> = (props: Props) => {
         />
       </StyledBoardContainer>
       <StyledSideBarContainer>
-        <SideBar onChangeColor={handleChangeColor} />
+        <ColorPalette onChangeColor={handleChangeColor} cols={12} rows={10} />
+        <PlayerList players={players} />
       </StyledSideBarContainer>
-    </>
+    </StyledMain>
   );
 };
 export default Game;
+
+const StyledMain = styled.main`
+  display: flex;
+  flex-direction: row;
+`;
 
 const StyledBoardContainer = styled.div`
   flex: 1;

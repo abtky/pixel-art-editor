@@ -9,19 +9,18 @@ import { SocketStatus } from '../interfaces';
 
 const App: React.FC = () => {
   const socket = useSocket();
-  const [initialized] = useState(false);
+  const [initialized, setInitialized] = useState(false);
   const { players, register } = usePlayerList(socket);
-  const handleDecideName = (name: string) => {
+  const handleDecideName = async (name: string) => {
     console.log('handleDecideName', name);
-    register(name);
+    await register(name);
+    setInitialized(true);
+
+    console.log({ players });
   };
 
-  useEffect(() => {
-    console.log('useEffect.players', players);
-  }, [players]);
-
   const renderMain = () => {
-    if (players.length > 0) {
+    if (initialized) {
       return <Game socket={socket} players={players} />;
     }
     return (
@@ -45,7 +44,5 @@ const StyledWrap = styled.div`
 `;
 
 const StyledMain = styled.main`
-  display: flex;
-  flex-direction: row;
   flex: 1 1 100%;
 `;
