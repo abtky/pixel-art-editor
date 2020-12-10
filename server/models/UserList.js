@@ -3,6 +3,13 @@ class UserList {
     this.users = [];
   }
 
+  removeUserById(targetUserId) {
+    this.users = this.users.filter((user) => {
+      return targetUserId !== user.id;
+    });
+    return this.users;
+  }
+
   removeUser(targetUser) {
     this.users = this.users.filter((user) => {
       return targetUser.id !== user.id;
