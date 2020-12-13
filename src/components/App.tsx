@@ -15,7 +15,7 @@ const App: React.FC = () => {
   };
   const handleChangeColor = (color: string) => {
     const id = yourInfo ? yourInfo.id : '';
-    update(id, { color });
+    update({ color });
   };
 
   const renderMain = () => {

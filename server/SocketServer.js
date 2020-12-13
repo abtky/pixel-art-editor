@@ -34,8 +34,8 @@ class SocketServer {
           players: this.playerList.players,
         });
       });
-      socket.on(ServerApi.player.update, ({ id, props }) => {
-        const player = this.playerList.findById(id);
+      socket.on(ServerApi.player.update, (props) => {
+        const player = this.playerList.findById(socket.id);
         const newData = { ...player, ...props };
         console.log({ props, newData });
         this.playerList.updatePlayer(newData);

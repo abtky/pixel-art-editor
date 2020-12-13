@@ -4,7 +4,7 @@ import { Player, SocketApi } from '../interfaces';
 type State = {
   yourInfo: Player | undefined;
   players: Player[];
-  update: (id: string, props: { [key: string]: string | number }) => void;
+  update: (props: { [key: string]: string | number }) => void;
   create: (name: string) => void;
 };
 export const usePlayerList = (socket: SocketIOClient.Socket): State => {
@@ -34,9 +34,9 @@ export const usePlayerList = (socket: SocketIOClient.Socket): State => {
     // const params = JSON.stringify({ name });
     socket.emit(SocketApi.PLAYER_CREATE, { name });
   };
-  const update = (id: string, props: { [key: string]: string | number }) => {
+  const update = (props: { [key: string]: string | number }) => {
     console.log('update', props);
-    socket.emit(SocketApi.PLAYER_UPDATE, { id, props });
+    socket.emit(SocketApi.PLAYER_UPDATE, props);
   };
   const remove = () => {
     console.log('remove');
