@@ -1,19 +1,19 @@
 const socketIO = require('socket.io');
 const Game = require('./models/Game');
-const User = require('./models/User');
-const UserList = require('./models/UserList');
+const Player = require('./models/Player');
+const PlayerList = require('./models/PlayerList');
 
 class SocketServer {
   constructor(server) {
     this.io = socketIO(server);
     this.game = new Game();
-    this.userList = new UserList();
+    this.playerList = new PlayerList();
   }
 
   init() {
     this.io.on('connection', (socket) => {
       socket.on('disconnect', () => {
-        this.userList.removeUserById(socket.id);
+        this.playerList.removePlayerById(socket.id);
       });
       socket.on('color', (message) => {
         const grid = this.game.setColorByJson(message);
@@ -21,10 +21,10 @@ class SocketServer {
       });
       socket.on('join', (message) => {
         const params = JSON.parse(message);
-        const user = new User(socket.id, params.name);
-        const newPlayer = this.userList.addUser(user);
+        const user = new Player(socket.id, params.name);
+        const newPlayer = this.playerList.addUser(user);
         console.log('socket.on join', { newPlayer });
-        socket.emit('joined', { newPlayer, players: this.userList.users });
+        socket.emit('joined', { newPlayer, players: this.playerList.players });
       });
       socket.on('request-game-data', () => {
         socket.emit('game-data', this.game.toString());

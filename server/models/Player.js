@@ -1,4 +1,4 @@
-class User {
+class Player {
   static get MAX_NAME_LENGTH() {
     return 12;
   }
@@ -9,7 +9,7 @@ class User {
     const filtered = letters.filter((letter) => {
       return letter.match(pattern);
     });
-    const result = filtered.slice(0, User.MAX_NAME_LENGTH).join('');
+    const result = filtered.slice(0, Player.MAX_NAME_LENGTH).join('');
     return result || 'unknown';
   }
 
@@ -20,11 +20,11 @@ class User {
   }
 
   setName(value) {
-    this.name = User.toValidName(value);
+    this.name = Player.toValidName(value);
   }
 
   toString() {
     return JSON.stringify(this);
   }
 }
-module.exports = User;
+module.exports = Player;
