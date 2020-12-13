@@ -15,6 +15,7 @@ class SocketServer {
     this.io.on('connection', (socket) => {
       socket.on('disconnect', () => {
         this.playerList.removePlayerById(socket.id);
+        this.updateUserList();
       });
       socket.on('color', (message) => {
         const grid = this.game.setColorByJson(message);
@@ -30,22 +31,26 @@ class SocketServer {
         const user = new Player(socket.id, params.name);
         const newPlayer = this.playerList.addUser(user);
         socket.emit(ServerApi.player.create, {
-          newPlayer,
-          players: this.playerList.players,
+          you: newPlayer,
         });
+        this.updateUserList();
       });
       socket.on(ServerApi.player.update, (props) => {
         const player = this.playerList.findById(socket.id);
         const newData = { ...player, ...props };
         console.log({ props, newData });
         this.playerList.updatePlayer(newData);
-        this.broadCast(ServerApi.player.update, {
-          players: this.playerList.players,
-        });
+        this.updateUserList();
       });
       socket.on('request-game-data', () => {
         socket.emit('game-data', this.game.toString());
       });
+    });
+  }
+
+  updateUserList() {
+    this.broadCast(ServerApi.player.update, {
+      players: this.playerList.players,
     });
   }
 

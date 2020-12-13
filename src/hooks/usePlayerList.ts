@@ -14,9 +14,8 @@ export const usePlayerList = (socket: SocketIOClient.Socket): State => {
   useEffect(() => {
     socket.on(
       SocketApi.PLAYER_CREATE,
-      (res: { newPlayer: Player; players: Player[] }) => {
-        setPlayers(res.players);
-        setYourInfo(res.newPlayer);
+      (res: { you: Player; players: Player[] }) => {
+        setYourInfo(res.you);
         socket.off(SocketApi.PLAYER_CREATE);
       }
     );
