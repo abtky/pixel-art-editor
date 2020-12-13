@@ -28,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${cssVars.fontFamily};
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
     
     src: url('assets/font/4Mini.ttf.woff') format('woff'),
     url('assets/font/4Mini.ttf.svg#4Mini') format('svg'), 
@@ -39,7 +40,8 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     background-color: ${cssVars.colorBackground};
     color: ${cssVars.colorText};
-    font-family: ${cssVars.fontFamily};
+    /* font-family: ${cssVars.fontFamily}; */
+    font-family: 'DIN Alternate Bold';
     font-size: ${cssVars.fontSize_S};
 
    -webkit-font-smoothing: antialiased;

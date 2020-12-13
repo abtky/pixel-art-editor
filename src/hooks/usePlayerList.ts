@@ -1,30 +1,46 @@
 import { useState, useEffect } from 'react';
-import { Player } from '../interfaces';
+import { Player, SocketApi } from '../interfaces';
 
-type JoinedServerMessage = {
-  newPlayer: Player;
-  players: Player[];
-};
 type State = {
   yourInfo: Player | undefined;
   players: Player[];
-  register: (name: string) => Promise<Player>;
+  update: (id: string, props: { [key: string]: string | number }) => void;
+  create: (name: string) => void;
 };
 export const usePlayerList = (socket: SocketIOClient.Socket): State => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [yourInfo, setYourInfo] = useState<Player>();
-  const register = (name: string): Promise<Player> => {
-    return new Promise((resolve) => {
-      const params = JSON.stringify({ name });
-      socket.on('joined', (serverMessage: JoinedServerMessage) => {
-        console.log('joined', serverMessage);
-        setPlayers(serverMessage.players);
-        setYourInfo(serverMessage.newPlayer);
-        socket.off('joined');
-        resolve(serverMessage.newPlayer);
-      });
-      socket.emit('join', params);
+
+  useEffect(() => {
+    socket.on(
+      SocketApi.PLAYER_CREATE,
+      (res: { newPlayer: Player; players: Player[] }) => {
+        setPlayers(res.players);
+        setYourInfo(res.newPlayer);
+        socket.off(SocketApi.PLAYER_CREATE);
+      }
+    );
+    socket.on(SocketApi.PLAYER_UPDATE, (res: { players: Player[] }) => {
+      console.log();
+      setPlayers(res.players);
     });
+    return () => {
+      socket.off(SocketApi.PLAYER_CREATE);
+      socket.off(SocketApi.PLAYER_UPDATE);
+    };
+  }, []);
+
+  const create = (name: string) => {
+    // const params = JSON.stringify({ name });
+    socket.emit(SocketApi.PLAYER_CREATE, { name });
   };
-  return { yourInfo, players, register };
+  const update = (id: string, props: { [key: string]: string | number }) => {
+    console.log('update', props);
+    socket.emit(SocketApi.PLAYER_UPDATE, { id, props });
+  };
+  const remove = () => {
+    console.log('remove');
+  };
+
+  return { yourInfo, players, create, update };
 };

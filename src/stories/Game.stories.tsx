@@ -26,7 +26,14 @@ const Template: Story = () => {
   return (
     <>
       <GlobalStyle />
-      <Game yourInfo={players[0]} socket={socket} players={players} />
+      <Game
+        yourInfo={players[0]}
+        socket={socket}
+        players={players}
+        onChangeColor={(color: string) => {
+          console.log(color);
+        }}
+      />
     </>
   );
 };

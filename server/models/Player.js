@@ -17,6 +17,7 @@ class Player {
     this.id = id;
     this.setName(name);
     this.color = 'white';
+    this.lastPaintedGrid = undefined;
   }
 
   setName(value) {

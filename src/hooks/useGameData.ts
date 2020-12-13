@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GameData, GridData } from '../interfaces';
+import { GameData, GridData, SocketApi } from '../interfaces';
 
 type ReturnType = {
   grids: GridData[];
@@ -46,8 +46,10 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   }, []);
 
   const handleClickGrid = (index: number, color: string) => {
-    const params = JSON.stringify({ index, color });
-    socket.emit('color', params);
+    socket.emit(SocketApi.GAME_FILL, { gridIndex: index });
+    console.log(color);
+    // const params = JSON.stringify({ index, color });
+    // socket.emit('color', params);
   };
 
   const state = {

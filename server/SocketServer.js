@@ -2,6 +2,7 @@ const socketIO = require('socket.io');
 const Game = require('./models/Game');
 const Player = require('./models/Player');
 const PlayerList = require('./models/PlayerList');
+const ServerApi = require('./ServerAPI');
 
 class SocketServer {
   constructor(server) {
@@ -19,12 +20,28 @@ class SocketServer {
         const grid = this.game.setColorByJson(message);
         this.broadCast('color', grid.toString());
       });
-      socket.on('join', (message) => {
-        const params = JSON.parse(message);
+      socket.on(ServerApi.game.fillGrid, ({ gridIndex }) => {
+        const player = this.playerList.findById(socket.id);
+        const grid = this.game.setColor(gridIndex, player.color);
+        console.log({ player, grid });
+        this.broadCast('color', grid.toString());
+      });
+      socket.on(ServerApi.player.create, (params) => {
         const user = new Player(socket.id, params.name);
         const newPlayer = this.playerList.addUser(user);
-        console.log('socket.on join', { newPlayer });
-        socket.emit('joined', { newPlayer, players: this.playerList.players });
+        socket.emit(ServerApi.player.create, {
+          newPlayer,
+          players: this.playerList.players,
+        });
+      });
+      socket.on(ServerApi.player.update, ({ id, props }) => {
+        const player = this.playerList.findById(id);
+        const newData = { ...player, ...props };
+        console.log({ props, newData });
+        this.playerList.updatePlayer(newData);
+        this.broadCast(ServerApi.player.update, {
+          players: this.playerList.players,
+        });
       });
       socket.on('request-game-data', () => {
         socket.emit('game-data', this.game.toString());

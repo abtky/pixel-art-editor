@@ -9,14 +9,25 @@ import { SocketStatus } from '../interfaces';
 
 const App: React.FC = () => {
   const socket = useSocket();
-  const { players, register, yourInfo } = usePlayerList(socket);
+  const { players, create, update, yourInfo } = usePlayerList(socket);
   const handleDecideName = (name: string) => {
-    register(name);
+    create(name);
+  };
+  const handleChangeColor = (color: string) => {
+    const id = yourInfo ? yourInfo.id : '';
+    update(id, { color });
   };
 
   const renderMain = () => {
     if (yourInfo) {
-      return <Game socket={socket} yourInfo={yourInfo} players={players} />;
+      return (
+        <Game
+          socket={socket}
+          onChangeColor={handleChangeColor}
+          yourInfo={yourInfo}
+          players={players}
+        />
+      );
     }
     return (
       <Entrance onDecideName={handleDecideName} status={SocketStatus.UNKNOWN} />

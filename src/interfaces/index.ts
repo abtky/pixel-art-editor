@@ -18,3 +18,11 @@ export type Player = {
   name: string;
   color: string;
 };
+
+// eslint-disable-next-line no-shadow
+export enum SocketApi {
+  PLAYER_CREATE = 'Player:create',
+  PLAYER_UPDATE = 'Player:update',
+  PLAYER_DELETE = 'Player:delete',
+  GAME_FILL = 'Game:fillGrid',
+}
