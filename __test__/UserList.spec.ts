@@ -7,18 +7,20 @@ describe('UserList', () => {
   userList.addUser(user);
   describe('UserList#addUser', () => {
     it('addUserを実行すると配列に新たなユーザー情報が追加される', () => {
-      expect(userList.addUser(user)).toEqual([user]);
+      userList.addUser(user);
+      expect(userList.users).toEqual([user]);
     });
   });
   describe('UserList#updateUser', () => {
     it('updateUserを実行すると同一IDをもつユーザーの情報が更新される', () => {
       const newName = 'updated';
       user.setName(newName);
-      const result = userList.updateUser(user)[0];
+      const result = userList.updateUser(user);
       expect(result.name).toEqual(newName);
     });
   });
   describe('UserList#removeUser', () => {
-    expect(userList.removeUser(user)).toEqual([]);
+    userList.removeUser(user);
+    expect(userList.users).toEqual([]);
   });
 });

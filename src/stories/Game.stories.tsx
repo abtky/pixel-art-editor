@@ -26,7 +26,7 @@ const Template: Story = () => {
   return (
     <>
       <GlobalStyle />
-      <Game socket={socket} players={players} />
+      <Game yourInfo={players[0]} socket={socket} players={players} />
     </>
   );
 };

@@ -13,22 +13,22 @@ class SocketServer {
   init() {
     this.io.on('connection', (socket) => {
       socket.on('disconnect', () => {
-        console.log('Client disconnected');
         this.userList.removeUserById(socket.id);
       });
       socket.on('color', (message) => {
-        console.log(socket.id);
-
         const grid = this.game.setColorByJson(message);
         this.broadCast('color', grid.toString());
       });
       socket.on('join', (message) => {
         const params = JSON.parse(message);
         const user = new User(socket.id, params.name);
-        this.userList.addUser(user);
-        socket.emit('joined', { players: this.userList.users });
+        const newPlayer = this.userList.addUser(user);
+        console.log('socket.on join', { newPlayer });
+        socket.emit('joined', { newPlayer, players: this.userList.users });
       });
-      //socket.emit('init', this.game.toString());
+      socket.on('request-game-data', () => {
+        socket.emit('game-data', this.game.toString());
+      });
     });
   }
 

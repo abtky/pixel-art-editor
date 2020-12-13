@@ -25,7 +25,7 @@ class UserList {
       return this.updateUser(newUser);
     }
     this.users.push(newUser);
-    return this.users;
+    return this.findById(newUser.id);
   }
 
   /**
@@ -36,7 +36,11 @@ class UserList {
       // targetUserとuserのIDが一致した場合はユーザー情報をtargetUserの値で更新する。
       return user.id === targetUser.id ? targetUser : user;
     });
-    return this.users;
+    return this.findById(targetUser.id);
+  }
+
+  findById(id) {
+    return this.users.find((user) => id === user.id);
   }
 }
 module.exports = UserList;

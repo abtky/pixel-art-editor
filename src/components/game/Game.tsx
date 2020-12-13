@@ -9,10 +9,11 @@ import PlayerList from './PlayerList';
 
 type Props = {
   socket: SocketIOClient.Socket;
+  yourInfo: Player;
   players: Player[];
 };
 const Game: React.FC<Props> = (props: Props) => {
-  const { socket, players } = props;
+  const { socket, yourInfo, players } = props;
   const [color, setColor] = useState('gold');
   const { grids, cols, rows, handleClickGrid } = useGameData(socket);
   const handleChangeColor = (newColor: string) => {
@@ -32,7 +33,7 @@ const Game: React.FC<Props> = (props: Props) => {
       </StyledBoardContainer>
       <StyledSideBarContainer>
         <ColorPalette onChangeColor={handleChangeColor} cols={12} rows={10} />
-        <PlayerList players={players} />
+        <PlayerList yourInfo={yourInfo} players={players} />
       </StyledSideBarContainer>
     </StyledMain>
   );

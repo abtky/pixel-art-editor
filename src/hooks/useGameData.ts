@@ -32,13 +32,14 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   }, [gameData]);
 
   useEffect(() => {
-    socket.on('init', (serverMessage: string) => {
-      socket.off('init');
+    socket.on('game-data', (serverMessage: string) => {
+      socket.off('game-data');
       const initialGameData = JSON.parse(serverMessage);
       setGameData(initialGameData);
     });
+    socket.emit('request-game-data');
     return () => {
-      socket.off('init');
+      socket.off('game-data');
       socket.off('color');
       socket.disconnect();
     };

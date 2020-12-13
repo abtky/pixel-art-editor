@@ -5,19 +5,25 @@ import { Player } from '../../interfaces';
 import { cssVars } from '../../style';
 
 type Props = {
+  yourInfo: Player;
   players: Player[];
 };
 const PlayerList: React.FC<Props> = (props: Props) => {
-  const { players } = props;
+  const { players, yourInfo } = props;
+
   return (
     <>
       <SideBarContent title="Players">
         <StyledList>
           {players.map((player: Player) => {
+            const isYourData = yourInfo.id === player.id;
+            const you = isYourData ? ` (YOU)` : '';
+            console.log({ yourInfo, player });
             return (
-              <StyledListItem>
+              <StyledListItem key={player.id}>
                 <StyledGird color={player.color} />
                 {player.name}
+                {you}
               </StyledListItem>
             );
           })}
