@@ -14,6 +14,7 @@ type ReturnType = {
 };
 export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   const [grids, setGrids] = useState<GridData[]>([]);
+  const [initialized, setInitialized] = useState(false);
   const [boardSize, setBoardSize] = useState<BoardSize>({ cols: 0, rows: 0 });
 
   const updateGrid = (grid: GridData) => {
@@ -22,23 +23,23 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
       setGrids(grids.concat());
     }
   };
+
   useEffect(() => {
     socket.on(SocketApi.GAME_FILL, (grid: GridData) => {
       updateGrid(grid);
     });
-    return () => {
-      socket.off(SocketApi.GAME_FILL);
-    };
-  }, [grids]);
+  }, [initialized]);
 
   useEffect(() => {
     socket.once(SocketApi.GAME_INFO, (res: GameDataResponse) => {
       setBoardSize(res.size);
       setGrids(res.grids);
+      setInitialized(true);
     });
     socket.emit(SocketApi.GAME_INFO);
     return () => {
       socket.off(SocketApi.GAME_INFO);
+      socket.off(SocketApi.GAME_FILL);
       socket.disconnect();
     };
   }, []);
