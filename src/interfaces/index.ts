@@ -29,4 +29,5 @@ export enum SocketApi {
   PLAYER_UPDATE = 'Player:update',
   PLAYER_DELETE = 'Player:delete',
   GAME_FILL = 'Game:fillGrid',
+  GAME_INFO = 'Game:info',
 }

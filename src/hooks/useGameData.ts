@@ -32,14 +32,13 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   }, [grids]);
 
   useEffect(() => {
-    socket.on('game-data', (res: GameDataResponse) => {
-      socket.off('game-data');
+    socket.once(SocketApi.GAME_INFO, (res: GameDataResponse) => {
       setBoardSize(res.size);
       setGrids(res.grids);
     });
-    socket.emit('request-game-data');
+    socket.emit(SocketApi.GAME_INFO);
     return () => {
-      socket.off('game-data');
+      socket.off(SocketApi.GAME_INFO);
       socket.disconnect();
     };
   }, []);

@@ -5,7 +5,7 @@ const ServerApi = {
     delete: 'Player:delete',
   },
   game: {
-    readData: 'Game:read',
+    info: 'Game:info',
     fillGrid: 'Game:fillGrid',
   },
 };

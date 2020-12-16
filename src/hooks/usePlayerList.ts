@@ -20,7 +20,6 @@ export const usePlayerList = (socket: SocketIOClient.Socket): State => {
       }
     );
     socket.on(SocketApi.PLAYER_UPDATE, (res: { players: Player[] }) => {
-      console.log();
       setPlayers(res.players);
     });
     return () => {
@@ -30,15 +29,10 @@ export const usePlayerList = (socket: SocketIOClient.Socket): State => {
   }, []);
 
   const create = (name: string) => {
-    // const params = JSON.stringify({ name });
     socket.emit(SocketApi.PLAYER_CREATE, { name });
   };
   const update = (props: { [key: string]: string | number }) => {
-    console.log('update', props);
     socket.emit(SocketApi.PLAYER_UPDATE, props);
-  };
-  const remove = () => {
-    console.log('remove');
   };
 
   return { yourInfo, players, create, update };

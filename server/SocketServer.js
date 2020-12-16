@@ -36,8 +36,8 @@ class SocketServer {
         this.playerList.updatePlayer(newData);
         this.updateUserList();
       });
-      socket.on('request-game-data', () => {
-        socket.emit('game-data', this.game.getInfo());
+      socket.on(ServerApi.game.info, () => {
+        socket.emit(ServerApi.game.info, this.game.getInfo());
       });
     });
   }

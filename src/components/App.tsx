@@ -14,7 +14,6 @@ const App: React.FC = () => {
     create(name);
   };
   const handleChangeColor = (color: string) => {
-    const id = yourInfo ? yourInfo.id : '';
     update({ color });
   };
 
