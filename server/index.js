@@ -12,7 +12,7 @@ const server = app.listen(PORT, (err) => {
   if (err) throw err;
   console.log(`Server running PORT => ${PORT}`);
 });
-server.maxConnections = 4;
+// server.maxConnections = 4;
 
 const io = new SocketServer(server);
 io.init();
