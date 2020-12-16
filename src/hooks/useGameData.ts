@@ -49,8 +49,8 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
 
   const state = {
     grids,
-    cols: boardSize?.cols || 0,
-    rows: boardSize?.rows || 0,
+    cols: boardSize.cols,
+    rows: boardSize.rows,
     handleClickGrid,
   };
 
