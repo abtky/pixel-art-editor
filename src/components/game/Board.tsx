@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { GameData, GridData } from '../interfaces';
-import { cssVars } from '../style';
+import { GridData } from '../../interfaces';
+import { cssVars } from '../../style';
 import Grid from './Grid';
 
-export type Props = GameData & {
+export type Props = {
+  cols: number;
+  rows: number;
+  grids: GridData[];
   onClickGrid: (index: number) => void;
 };
 const Board: React.FC<Props> = (props: Props) => {

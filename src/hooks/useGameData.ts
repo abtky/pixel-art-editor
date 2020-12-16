@@ -1,58 +1,56 @@
 import { useEffect, useState } from 'react';
-import { GameData, GridData } from '../interfaces';
+import { BoardSize, GridData, SocketApi } from '../interfaces';
+
+type GameDataResponse = {
+  size: BoardSize;
+  grids: GridData[];
+};
 
 type ReturnType = {
   grids: GridData[];
   cols: number;
   rows: number;
-  handleClickGrid: (index: number, color: string) => void;
+  handleClickGrid: (index: number) => void;
 };
 export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
-  const [gameData, setGameData] = useState<GameData>();
+  const [grids, setGrids] = useState<GridData[]>([]);
+  const [boardSize, setBoardSize] = useState<BoardSize>({ cols: 0, rows: 0 });
 
-  const updateGrid = (jsonString: string) => {
-    const grid = JSON.parse(jsonString);
-    const grids = gameData?.grids;
-
+  const updateGrid = (grid: GridData) => {
     if (grids && grids[grid.index]) {
       grids[grid.index] = grid;
-      const newData: GameData = {
-        ...gameData,
-        grids: grids.concat(),
-      } as GameData;
-
-      setGameData(newData);
+      setGrids(grids.concat());
     }
   };
   useEffect(() => {
-    socket.off('color');
-    socket.on('color', (message: string) => {
-      updateGrid(message);
-    });
-  }, [gameData]);
-
-  useEffect(() => {
-    socket.on('init', (serverMessage: string) => {
-      socket.off('init');
-      const initialGameData = JSON.parse(serverMessage);
-      setGameData(initialGameData);
+    socket.on(SocketApi.GAME_FILL, (grid: GridData) => {
+      updateGrid(grid);
     });
     return () => {
-      socket.off('init');
-      socket.off('color');
+      socket.off(SocketApi.GAME_FILL);
+    };
+  }, [grids]);
+
+  useEffect(() => {
+    socket.once(SocketApi.GAME_INFO, (res: GameDataResponse) => {
+      setBoardSize(res.size);
+      setGrids(res.grids);
+    });
+    socket.emit(SocketApi.GAME_INFO);
+    return () => {
+      socket.off(SocketApi.GAME_INFO);
       socket.disconnect();
     };
   }, []);
 
-  const handleClickGrid = (index: number, color: string) => {
-    const params = JSON.stringify({ index, color });
-    socket.emit('color', params);
+  const handleClickGrid = (index: number) => {
+    socket.emit(SocketApi.GAME_FILL, { gridIndex: index });
   };
 
   const state = {
-    grids: gameData?.grids || [],
-    cols: gameData?.cols || 0,
-    rows: gameData?.rows || 0,
+    grids,
+    cols: boardSize.cols,
+    rows: boardSize.rows,
     handleClickGrid,
   };
 

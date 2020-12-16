@@ -1,38 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSocket } from '../hooks/useSocket';
-import { useGameData } from '../hooks/useGameData';
+import { usePlayerList } from '../hooks/usePlayerList';
 import AppHeader from './AppHeader';
-import Board from './Board';
-import SideBar from './SideBar';
-import { cssVars } from '../style';
+import Game from './game/Game';
+import Entrance from './entrance/Entrance';
+import { SocketStatus } from '../interfaces';
 
 const App: React.FC = () => {
   const socket = useSocket();
-  const [color, setColor] = useState('gold');
-  const { grids, cols, rows, handleClickGrid } = useGameData(socket);
-  const handleChangeColor = (newColor: string) => {
-    setColor(newColor);
+  const { players, create, update, yourInfo } = usePlayerList(socket);
+  const handleDecideName = (name: string) => {
+    create(name);
+  };
+  const handleChangeColor = (color: string) => {
+    update({ color });
+  };
+
+  const renderMain = () => {
+    if (yourInfo) {
+      return (
+        <Game
+          socket={socket}
+          onChangeColor={handleChangeColor}
+          yourInfo={yourInfo}
+          players={players}
+        />
+      );
+    }
+    return (
+      <Entrance onDecideName={handleDecideName} status={SocketStatus.UNKNOWN} />
+    );
   };
 
   return (
     <StyledWrap>
       <AppHeader />
-      <StyledMain>
-        <StyledBoardContainer>
-          <Board
-            onClickGrid={(index: number) => {
-              handleClickGrid(index, color);
-            }}
-            cols={cols}
-            rows={rows}
-            grids={grids}
-          />
-        </StyledBoardContainer>
-        <StyledSideBarContainer>
-          <SideBar onChangeColor={handleChangeColor} />
-        </StyledSideBarContainer>
-      </StyledMain>
+      <StyledMain>{renderMain()}</StyledMain>
     </StyledWrap>
   );
 };
@@ -45,19 +49,5 @@ const StyledWrap = styled.div`
 `;
 
 const StyledMain = styled.main`
-  display: flex;
-  flex-direction: row;
   flex: 1 1 100%;
-`;
-
-const StyledBoardContainer = styled.div`
-  flex: 1;
-  object-fit: contain;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const StyledSideBarContainer = styled.div`
-  width: min(${cssVars.layoutSidebarWidth}, ${cssVars.layoutSidebarMinWidth});
-  border-left: ${cssVars.border};
 `;

@@ -14,13 +14,15 @@ class Game {
     this.grids = new Array(numGrigs).fill(null).map((v, i) => new Grid(i));
   }
 
-  toString() {
+  getInfo() {
     const params = {
-      cols: Game.NUM_COLS,
-      rows: Game.NUM_ROWS,
+      size: {
+        cols: Game.NUM_COLS,
+        rows: Game.NUM_ROWS,
+      },
       grids: this.grids,
     };
-    return JSON.stringify(params);
+    return params;
   }
 
   setColorByJson(json) {

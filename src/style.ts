@@ -24,16 +24,6 @@ export const cssVars = {
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
-  @font-face {
-    font-family: ${cssVars.fontFamily};
-    font-weight: normal;
-    font-style: normal;
-    
-    src: url('assets/font/4Mini.ttf.woff') format('woff'),
-    url('assets/font/4Mini.ttf.svg#4Mini') format('svg'), 
-    url('assets/font/4Mini.ttf.eot'),
-    url('assets/font/4Mini.ttf.eot?#iefix') format('embedded-opentype');
-  }
 
   body {
     margin: 0;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { cssVars } from '../style';
-import { useColors } from '../hooks/useColors';
+import { useColors } from '../../hooks/useColors';
 import ColorPaletteGrid from './ColorPaletteGrid';
+import SideBarContent from './SideBarContent';
 
 type Props = {
   cols: number;
@@ -22,9 +22,8 @@ const ColorPalette: React.FC<Props> = (props: Props) => {
 
   const colors: string[] = useColors(cols, rows);
   return (
-    <div>
-      <StyledTitle>COLOR</StyledTitle>
-      <StyledContainer>
+    <SideBarContent title="Color">
+      <StyledContent>
         {colors.map((color, i) => {
           return (
             <StyledGrid cols={cols} key={color}>
@@ -37,23 +36,13 @@ const ColorPalette: React.FC<Props> = (props: Props) => {
             </StyledGrid>
           );
         })}
-      </StyledContainer>
-    </div>
+      </StyledContent>
+    </SideBarContent>
   );
 };
 export default ColorPalette;
 
-const StyledTitle = styled.h2`
-  border-bottom: ${cssVars.border};
-  height: 32px;
-  font-size: ${cssVars.fontSize_S};
-  display: flex;
-  align-items: center;
-  background-color: #331d33;
-  padding-left: ${cssVars.fontSize_S};
-`;
-
-const StyledContainer = styled.div`
+const StyledContent = styled.div`
   display: flex;
   flex-direction: rows;
   flex-wrap: wrap;

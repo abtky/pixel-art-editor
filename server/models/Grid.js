@@ -3,9 +3,5 @@ class Grid {
     this.index = index;
     this.color = color;
   }
-
-  toString() {
-    return JSON.stringify(this);
-  }
 }
 module.exports = Grid;
