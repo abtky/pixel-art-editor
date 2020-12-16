@@ -16,18 +16,19 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
   const [grids, setGrids] = useState<GridData[]>([]);
   const [boardSize, setBoardSize] = useState<BoardSize>({ cols: 0, rows: 0 });
 
-  const updateGrid = (jsonString: string) => {
-    const grid = JSON.parse(jsonString);
+  const updateGrid = (grid: GridData) => {
     if (grids && grids[grid.index]) {
       grids[grid.index] = grid;
       setGrids(grids.concat());
     }
   };
   useEffect(() => {
-    socket.off(SocketApi.GAME_FILL);
-    socket.on(SocketApi.GAME_FILL, (message: string) => {
-      updateGrid(message);
+    socket.on(SocketApi.GAME_FILL, (grid: GridData) => {
+      updateGrid(grid);
     });
+    return () => {
+      socket.off(SocketApi.GAME_FILL);
+    };
   }, [grids]);
 
   useEffect(() => {
@@ -39,7 +40,6 @@ export const useGameData = (socket: SocketIOClient.Socket): ReturnType => {
     socket.emit('request-game-data');
     return () => {
       socket.off('game-data');
-      socket.off(SocketApi.GAME_FILL);
       socket.disconnect();
     };
   }, []);

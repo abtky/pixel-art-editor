@@ -25,15 +25,6 @@ class Game {
     return params;
   }
 
-  toString() {
-    const params = {
-      cols: Game.NUM_COLS,
-      rows: Game.NUM_ROWS,
-      grids: this.grids,
-    };
-    return JSON.stringify(params);
-  }
-
   setColorByJson(json) {
     const options = JSON.parse(json);
     return this.setColor(options.index, options.color);

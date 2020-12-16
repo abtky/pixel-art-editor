@@ -17,15 +17,10 @@ class SocketServer {
         this.playerList.removePlayerById(socket.id);
         this.updateUserList();
       });
-      socket.on('color', (message) => {
-        const grid = this.game.setColorByJson(message);
-        this.broadCast('color', grid.toString());
-      });
       socket.on(ServerApi.game.fillGrid, ({ gridIndex }) => {
         const player = this.playerList.findById(socket.id);
         const grid = this.game.setColor(gridIndex, player.color);
-        console.log({ player, grid });
-        this.broadCast('color', grid.toString());
+        this.broadCast(ServerApi.game.fillGrid, grid);
       });
       socket.on(ServerApi.player.create, (params) => {
         const user = new Player(socket.id, params.name);
@@ -38,12 +33,11 @@ class SocketServer {
       socket.on(ServerApi.player.update, (props) => {
         const player = this.playerList.findById(socket.id);
         const newData = { ...player, ...props };
-        console.log({ props, newData });
         this.playerList.updatePlayer(newData);
         this.updateUserList();
       });
       socket.on('request-game-data', () => {
-        socket.emit('game-data', this.game.toString());
+        socket.emit('game-data', this.game.getInfo());
       });
     });
   }
