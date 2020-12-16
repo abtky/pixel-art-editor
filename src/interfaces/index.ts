@@ -8,6 +8,10 @@ export type GridData = {
   index: number;
   color: string;
 };
+export type BoardSize = {
+  cols: number;
+  rows: number;
+};
 export type GameData = {
   cols: number;
   rows: number;

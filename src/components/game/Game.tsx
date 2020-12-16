@@ -22,7 +22,7 @@ const Game: React.FC<Props> = (props: Props) => {
       <StyledBoardContainer>
         <Board
           onClickGrid={(index: number) => {
-            handleClickGrid(index, yourInfo.color);
+            handleClickGrid(index);
           }}
           cols={cols}
           rows={rows}

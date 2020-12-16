@@ -14,6 +14,17 @@ class Game {
     this.grids = new Array(numGrigs).fill(null).map((v, i) => new Grid(i));
   }
 
+  getInfo() {
+    const params = {
+      size: {
+        cols: Game.NUM_COLS,
+        rows: Game.NUM_ROWS,
+      },
+      grids: this.grids,
+    };
+    return params;
+  }
+
   toString() {
     const params = {
       cols: Game.NUM_COLS,
