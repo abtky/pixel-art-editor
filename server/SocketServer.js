@@ -2,7 +2,7 @@ const socketIO = require('socket.io');
 const Game = require('./models/Game');
 const Player = require('./models/Player');
 const PlayerList = require('./models/PlayerList');
-const ServerApi = require('./ServerAPI');
+const ServerApi = require('./ServerApi');
 
 class SocketServer {
   constructor(server) {
