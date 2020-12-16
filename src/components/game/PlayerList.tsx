@@ -18,7 +18,6 @@ const PlayerList: React.FC<Props> = (props: Props) => {
           {players.map((player: Player) => {
             const isYourData = yourInfo.id === player.id;
             const you = isYourData ? ` (YOU)` : '';
-            console.log({ yourInfo, player });
             return (
               <StyledListItem key={player.id}>
                 <StyledGird color={player.color} />
