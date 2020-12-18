@@ -6,10 +6,13 @@ import AppHeader from './AppHeader';
 import Game from './game/Game';
 import Entrance from './entrance/Entrance';
 import { SocketStatus } from '../interfaces';
+import ErrorDialogue from './ErrorDialogue';
 
 const App: React.FC = () => {
-  const socket = useSocket();
+  const { socket, onDisconnect } = useSocket();
   const { players, create, update, yourInfo } = usePlayerList(socket);
+  const [hasError, setHasError] = useState(false);
+
   const handleDecideName = (name: string) => {
     create(name);
   };
@@ -17,7 +20,16 @@ const App: React.FC = () => {
     update({ color });
   };
 
+  useEffect(() => {
+    onDisconnect((message) => {
+      setHasError(true);
+    });
+  }, []);
+
   const renderMain = () => {
+    if (hasError) {
+      return <ErrorDialogue />;
+    }
     if (yourInfo) {
       return (
         <Game

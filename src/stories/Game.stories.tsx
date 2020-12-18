@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 const Template: Story = () => {
-  const socket = useSocket();
+  const { socket, onDisconnect } = useSocket();
   const players = [
     {
       id: '01',
