@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { cssVars } from '../../style';
+import Dialogue from '../Dialogue';
 import ButtonList from './ButtonList';
 import InputName from './InputName';
 import { useUserName } from '../../hooks/useUserName';
@@ -45,17 +46,14 @@ const Entrance: React.FC<Props> = (props: Props) => {
     };
   }, [name]);
   return (
-    <StyledWrapper>
-      <StyledContent>
-        <StyledTitle>ENTER YOUR NAME.</StyledTitle>
-        <InputName name={name} maxLength={maxLength} />
-        <ButtonList
-          onClickClear={handleClickClear}
-          onClickExecute={handleClickExecute}
-        />
-        {status}
-      </StyledContent>
-    </StyledWrapper>
+    <Dialogue>
+      <StyledTitle>ENTER YOUR NAME.</StyledTitle>
+      <InputName name={name} maxLength={maxLength} />
+      <ButtonList
+        onClickClear={handleClickClear}
+        onClickExecute={handleClickExecute}
+      />
+    </Dialogue>
   );
 };
 
