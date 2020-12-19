@@ -30,6 +30,7 @@ const Board: React.FC<Props> = (props: Props) => {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
       onMouseDown={handleMouseDown}
+      onTouchStart={handleMouseDown}
     >
       {grids.map((data) => (
         <StyledGrid cols={cols} rows={rows} key={data.index}>
@@ -63,10 +64,14 @@ const StyledContainer = styled.div`
   margin: 0 auto;
   user-select: none;
   box-sizing: border-box;
+  ${cssVars.mediaQueryMobile} {
+    --size: calc(100vw - 32px);
+    padding: 2px;
+    margin: 16px;
+  }
 `;
 
 const StyledGrid = styled.div<{ cols: number; rows: number }>`
-  border-width: 1px;
   overflow: hidden;
   box-sizing: border-box;
   padding: 1px;
@@ -74,4 +79,7 @@ const StyledGrid = styled.div<{ cols: number; rows: number }>`
         width: calc((100% - 1px) / ${props.cols});
         height: calc((100% - 1px) / ${props.rows});
     `}
+  ${cssVars.mediaQueryMobile} {
+    padding: 0;
+  }
 `;

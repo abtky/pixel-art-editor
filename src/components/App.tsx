@@ -6,6 +6,7 @@ import AppHeader from './AppHeader';
 import Game from './game/Game';
 import Entrance from './entrance/Entrance';
 import ErrorDialogue from './ErrorDialogue';
+import { cssVars } from '../style';
 
 const App: React.FC = () => {
   const { socket, onDisconnect } = useSocket();
@@ -55,8 +56,10 @@ const StyledWrap = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
 `;
 
 const StyledMain = styled.main`
   flex: 1 1 100%;
+  overflow: hidden;
 `;

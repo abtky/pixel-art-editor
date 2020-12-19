@@ -20,7 +20,7 @@ export const cssVars = {
   layoutHeaderHeight: '40px',
   layoutSidebarWidth: '320px',
   layoutSidebarMinWidth: '30vw',
-  mediaQueryPortrait: '@media (max-width: 375px)',
+  mediaQueryMobile: '@media (max-width: 375px)',
 };
 
 export const GlobalStyle = createGlobalStyle`

@@ -41,7 +41,8 @@ const StyledMain = styled.main`
   display: flex;
   flex-direction: row;
   height: 100%;
-  ${cssVars.mediaQueryPortrait} {
+  overflow: hidden;
+  ${cssVars.mediaQueryMobile} {
     display: block;
   }
 `;
@@ -52,12 +53,19 @@ const StyledBoardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${cssVars.mediaQueryMobile} {
+    border-bottom: ${cssVars.borderStyle} 4px;
+  }
 `;
 const StyledSideBarContainer = styled.div`
   width: min(${cssVars.layoutSidebarWidth}, ${cssVars.layoutSidebarMinWidth});
   border-left: ${cssVars.border};
-  ${cssVars.mediaQueryPortrait} {
+  ${cssVars.mediaQueryMobile} {
     border: none;
     width: 100%;
+    height: calc(100% - 100vw);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
   }
 `;
