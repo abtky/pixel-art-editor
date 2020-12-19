@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const socketIO = require('socket.io');
 const Game = require('./models/Game');
 const Player = require('./models/Player');

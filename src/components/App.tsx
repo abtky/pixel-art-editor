@@ -21,7 +21,7 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    onDisconnect((message) => {
+    onDisconnect(() => {
       setHasError(true);
     });
   }, []);
