@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { GridData } from '../../interfaces';
+import { GridData, Player } from '../../interfaces';
 import { cssVars } from '../../style';
 import Grid from './Grid';
+import PlayersIndicator from './PlayersIndicator';
 
 export type Props = {
   cols: number;
   rows: number;
   grids: GridData[];
+  yourInfo: Player;
+  players: Player[];
   onClickGrid: (index: number) => void;
 };
 const Board: React.FC<Props> = (props: Props) => {
-  const { rows, cols, grids } = props;
+  const { rows, cols, grids, players, yourInfo } = props;
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   const handleClick = (data: GridData) => {
@@ -41,6 +44,12 @@ const Board: React.FC<Props> = (props: Props) => {
           />
         </StyledGrid>
       ))}
+      <PlayersIndicator
+        cols={cols}
+        rows={rows}
+        yourInfo={yourInfo}
+        players={players}
+      />
     </StyledContainer>
   );
 };
@@ -69,6 +78,7 @@ const StyledContainer = styled.div`
     padding: 2px;
     margin: 16px;
   }
+  position: relative;
 `;
 
 const StyledGrid = styled.div<{ cols: number; rows: number }>`

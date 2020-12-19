@@ -15,6 +15,7 @@ export type Player = {
   id: string;
   name: string;
   color: string;
+  lastPaintedGrid?: GridData;
 };
 
 // eslint-disable-next-line no-shadow

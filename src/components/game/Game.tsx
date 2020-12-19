@@ -26,6 +26,8 @@ const Game: React.FC<Props> = (props: Props) => {
           cols={cols}
           rows={rows}
           grids={grids}
+          yourInfo={yourInfo}
+          players={players}
         />
       </StyledBoardContainer>
       <StyledSideBarContainer>

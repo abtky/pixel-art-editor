@@ -20,8 +20,10 @@ class SocketServer {
       });
       socket.on(ServerApi.game.fillGrid, ({ gridIndex }) => {
         const player = this.playerList.findById(socket.id);
-        const grid = this.game.setColor(gridIndex, player.color);
-        this.broadCast(ServerApi.game.fillGrid, grid);
+        player.lastPaintedGrid = this.game.setColor(gridIndex, player.color);
+        this.playerList.updatePlayer(player);
+        this.broadCast(ServerApi.game.fillGrid, player.lastPaintedGrid);
+        this.updateUserList();
       });
       socket.on(ServerApi.player.create, (params) => {
         const user = new Player(socket.id, params.name);

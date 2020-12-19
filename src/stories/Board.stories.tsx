@@ -8,6 +8,11 @@ export default {
   component: Board,
 } as Meta;
 
+const playerMock = {
+  id: '',
+  name: 'you',
+  color: 'white',
+};
 const Template: Story<Props> = (args: Props) => {
   const createGrids = (c: number, r: number) => {
     const length = c * r;
@@ -25,6 +30,8 @@ const Template: Story<Props> = (args: Props) => {
       <Board
         cols={args.cols}
         rows={args.rows}
+        players={[]}
+        yourInfo={playerMock}
         onClickGrid={() => {
           console.log('onClickGrid');
         }}
