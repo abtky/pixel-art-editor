@@ -57,6 +57,7 @@ const StyledWrap = styled.div`
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  height: -webkit-fill-available;
 `;
 
 const StyledMain = styled.main`
