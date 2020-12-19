@@ -27,7 +27,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledContent = styled.div`
-  width: 480px;
+  width: min(90vw, 480px);
   height: 320px;
   background-color: ${cssVars.colorBackground};
   border: 1px solid ${cssVars.colorText};

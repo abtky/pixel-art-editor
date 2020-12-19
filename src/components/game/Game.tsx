@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Board from './Board';
 import { cssVars } from '../../style';
@@ -15,7 +15,6 @@ type Props = {
 };
 const Game: React.FC<Props> = (props: Props) => {
   const { socket, yourInfo, players, onChangeColor } = props;
-  const [color, setColor] = useState('gold');
   const { grids, cols, rows, handleClickGrid } = useGameData(socket);
   return (
     <StyledMain>
@@ -41,6 +40,10 @@ export default Game;
 const StyledMain = styled.main`
   display: flex;
   flex-direction: row;
+  height: 100%;
+  ${cssVars.mediaQueryPortrait} {
+    display: block;
+  }
 `;
 
 const StyledBoardContainer = styled.div`
@@ -53,4 +56,8 @@ const StyledBoardContainer = styled.div`
 const StyledSideBarContainer = styled.div`
   width: min(${cssVars.layoutSidebarWidth}, ${cssVars.layoutSidebarMinWidth});
   border-left: ${cssVars.border};
+  ${cssVars.mediaQueryPortrait} {
+    border: none;
+    width: 100%;
+  }
 `;
