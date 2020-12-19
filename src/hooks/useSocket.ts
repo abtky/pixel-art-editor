@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
 
-type ErrorCallBack = (e: Error) => any;
+type ErrorCallBack = (e: Error) => void;
 
 type State = {
   socket: SocketIOClient.Socket;

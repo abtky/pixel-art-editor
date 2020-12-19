@@ -5,7 +5,6 @@ import { usePlayerList } from '../hooks/usePlayerList';
 import AppHeader from './AppHeader';
 import Game from './game/Game';
 import Entrance from './entrance/Entrance';
-import { SocketStatus } from '../interfaces';
 import ErrorDialogue from './ErrorDialogue';
 
 const App: React.FC = () => {
@@ -40,9 +39,7 @@ const App: React.FC = () => {
         />
       );
     }
-    return (
-      <Entrance onDecideName={handleDecideName} status={SocketStatus.UNKNOWN} />
-    );
+    return <Entrance onDecideName={handleDecideName} />;
   };
 
   return (

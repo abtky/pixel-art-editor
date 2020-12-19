@@ -1,9 +1,3 @@
-// eslint-disable-next-line no-shadow
-export enum SocketStatus {
-  UNKNOWN,
-  SUCCESS,
-  ERROR,
-}
 export type GridData = {
   index: number;
   color: string;
