@@ -5,8 +5,8 @@ import { usePlayerList } from '../hooks/usePlayerList';
 import AppHeader from './AppHeader';
 import Game from './game/Game';
 import Entrance from './entrance/Entrance';
-import { SocketStatus } from '../interfaces';
 import ErrorDialogue from './ErrorDialogue';
+import { cssVars } from '../style';
 
 const App: React.FC = () => {
   const { socket, onDisconnect } = useSocket();
@@ -40,9 +40,7 @@ const App: React.FC = () => {
         />
       );
     }
-    return (
-      <Entrance onDecideName={handleDecideName} status={SocketStatus.UNKNOWN} />
-    );
+    return <Entrance onDecideName={handleDecideName} />;
   };
 
   return (
@@ -58,8 +56,10 @@ const StyledWrap = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
 `;
 
 const StyledMain = styled.main`
   flex: 1 1 100%;
+  overflow: hidden;
 `;

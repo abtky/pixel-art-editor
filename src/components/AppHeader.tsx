@@ -15,9 +15,13 @@ const StyledHeader = styled.header`
   height: ${cssVars.layoutHeaderHeight};
   display: flex;
   align-items: center;
-  padding-left: ${cssVars.fontSize_M};
+  padding: 0 ${cssVars.fontSize_M};
   border-bottom: ${cssVars.border};
   background-color: #1a1826;
+  ${cssVars.mediaQueryMobile} {
+    height: 32px;
+    justify-content: center;
+  }
 `;
 
 const StyledTitle = styled.h1`
@@ -25,4 +29,8 @@ const StyledTitle = styled.h1`
   height: 1em;
   transform: translateY(3px);
   overflow: hidden;
+  ${cssVars.mediaQueryMobile} {
+    transform: translateY(2px);
+    font-size: ${cssVars.fontSize_M};
+  }
 `;

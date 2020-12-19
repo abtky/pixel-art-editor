@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { useEffect, useState } from 'react';
 
-type ErrorCallBack = (e: Error) => any;
+type ErrorCallBack = (e: Error) => void;
 
 type State = {
   socket: SocketIOClient.Socket;
@@ -22,7 +22,8 @@ export const useSocket = (): State => {
   }, []);
 
   const onDisconnect = (callBack: ErrorCallBack): void => {
-    const failEvents = ['disconnect', 'connect_error', 'connect_failed'];
+    // const failEvents = ['disconnect', 'connect_error', 'connect_failed'];
+    const failEvents = ['connect_error', 'connect_failed'];
     failEvents.forEach((eventName: string) => {
       socket.on(eventName, (e: Error) => {
         socket.disconnect();
