@@ -6,7 +6,6 @@ import AppHeader from './AppHeader';
 import Game from './game/Game';
 import Entrance from './entrance/Entrance';
 import ErrorDialogue from './ErrorDialogue';
-import { cssVars } from '../style';
 
 const App: React.FC = () => {
   const { socket, onDisconnect } = useSocket();
